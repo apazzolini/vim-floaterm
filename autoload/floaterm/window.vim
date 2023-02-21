@@ -114,10 +114,10 @@ function! s:open_float(bufnr, config) abort
   let options = {
         \ 'relative': 'editor',
         \ 'anchor': a:config.anchor,
-        \ 'row': a:config.row + (a:config.anchor[0] == 'N' ? 1 : -1),
-        \ 'col': a:config.col + (a:config.anchor[1] == 'W' ? 1 : -1),
-        \ 'width': a:config.width - 2,
-        \ 'height': a:config.height - 2,
+        \ 'row': a:config.row - 2 + (a:config.anchor[0] == 'N' ? 1 : -1),
+        \ 'col': a:config.col - 4 + (a:config.anchor[1] == 'W' ? 1 : -1),
+        \ 'width': a:config.width + 99,
+        \ 'height': a:config.height + 2,
         \ 'style':'minimal',
         \ }
   let winid = nvim_open_win(a:bufnr, v:true, options)
