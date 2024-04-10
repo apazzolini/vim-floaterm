@@ -1,8 +1,12 @@
-function! floaterm#edita#neovim#editor#open(target, client)
+function! floaterm#edita#neovim#editor#open(target, client, line)
   let bufnr = floaterm#buflist#curr()
   call floaterm#window#hide(bufnr)
   let opener = floaterm#config#get(bufnr, 'opener', g:floaterm_opener)
-  call floaterm#util#open([{'filename': fnameescape(a:target)}], opener)
+  let dict = {'filename': fnameescape(a:target)}
+  if a:line != "0"
+    let dict['lnum'] = a:line
+  endif
+  call floaterm#util#open([dict], opener)
   let mode = floaterm#edita#neovim#util#mode(a:client)
   let b:edita = sockconnect(mode, a:client, { 'rpc': 1 })
   if index([
